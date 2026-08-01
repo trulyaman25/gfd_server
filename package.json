@@ -4,10 +4,10 @@
   "private": true,
   "type": "module",
   "description": "Stores quiz attempts from the Girlfriend's Day site in MongoDB.",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "node --watch src/index.js"
+    "start": "node index.js",
+    "dev": "node --watch index.js"
   },
   "engines": {
     "node": ">=18.17"

@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: gfd-server
-    env: node
-    plan: free
-    rootDir: server
-    buildCommand: npm ci
-    startCommand: npm start
-    autoDeploy: true
