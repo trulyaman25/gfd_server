@@ -66,7 +66,7 @@ export const config = {
   mongoDb: str('MONGODB_DB', 'girlfriends_day'),
 
   port: int('PORT', 4500),
-  host: str('HOST', '127.0.0.1'),
+  host: str('HOST', '0.0.0.0'),
 
   adminToken: adminToken || null,
   allowedOrigins,
