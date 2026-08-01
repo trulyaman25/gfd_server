@@ -99,7 +99,7 @@ export function configWarnings() {
 
   if (config.allowedOrigins.length === 0) {
     warnings.push(
-      'ALLOWED_ORIGINS is empty, so every browser origin is allowed. Fine for a public backend, but set it if you want to restrict who can POST.'
+      'ALLOWED_ORIGINS is empty and the server allows every browser origin. Set it only if you want to re-enable origin restrictions later.'
     );
   }
 

@@ -16,24 +16,15 @@ export function cors(req, res, next) {
 
   if (!origin) return next();
 
-  const allowed = config.allowedOrigins.includes(origin.replace(/\/$/, ''));
-  const allowAll = config.allowedOrigins.length === 0;
-
-  if (allowed || allowAll) {
-    res.setHeader('Access-Control-Allow-Origin', allowAll ? '*' : origin);
-    /* The allowlist is per-origin, so caches must key on Origin or one visitor's
-     * response could be replayed to another. */
-    if (!allowAll) {
-      res.setHeader('Vary', 'Origin');
-    }
-    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.setHeader('Access-Control-Max-Age', '600');
-  }
+  /* This backend only accepts a tiny JSON payload and does not use cookies or
+   * other credentials, so there is no reason to block browser origins here. */
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Max-Age', '600');
 
   if (req.method === 'OPTIONS') {
-    /* An unlisted origin gets a plain 204 with no allow headers, which the
-     * browser then refuses. Answering 403 here would leak the allowlist. */
+    /* Preflight only needs the headers above. */
     return res.status(204).end();
   }
 
