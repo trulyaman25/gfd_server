@@ -1,0 +1,20 @@
+{
+  "name": "girlfriends-day-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Stores quiz attempts from the Girlfriend's Day site in MongoDB.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "engines": {
+    "node": ">=18.17"
+  },
+  "dependencies": {
+    "dotenv": "17.4.2",
+    "express": "4.22.2",
+    "mongoose": "8.24.2"
+  }
+}

@@ -1,0 +1,9 @@
+# Never commit the connection string or the admin token.
+.env
+.env.*
+!.env.example
+
+node_modules
+npm-debug.log*
+*.log
+.DS_Store
