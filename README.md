@@ -103,9 +103,10 @@ VITE_API_BASE=https://your-server.example
 ALLOWED_ORIGINS=https://your-site.example
 ```
 
-Deploying to Render, Railway, Fly or similar: `npm start` is the start command,
-and every variable in `.env.example` goes in the host's environment settings.
-Atlas also needs to allow the host's outbound IP under **Network Access**.
+Deploying to Render, Railway, Fly or similar: `npm ci` is the build step,
+`npm start` is the start command, and every variable in `.env.example` goes in
+the host's environment settings. Atlas also needs to allow the host's outbound
+IP under **Network Access**.
 
 The site treats this server as optional. Every request is fire-and-forget, so if
 it's down, not deployed, or blocked, the page carries on and she sees no
@@ -122,8 +123,9 @@ Worth knowing, since her typed answers are in here.
 - **The token comparison is constant time.** `===` leaks the length of the
   matching prefix through timing, which is enough to recover a token one
   character at a time.
-- **CORS is an allowlist.** Empty `ALLOWED_ORIGINS` means no cross-origin
-  browser requests at all, rather than `*`.
+- **CORS is open by default.** The server replies with `Access-Control-Allow-Origin: *`
+  for browser requests, so `ALLOWED_ORIGINS` is only there if you want to tighten
+  that later.
 - **Nothing is stored that wasn't explicitly copied across.** Every field in an
   incoming body is coerced to the right type and cut to length in
   `src/lib/sanitize.js`; anything else is dropped.
