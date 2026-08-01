@@ -93,7 +93,7 @@ export function configWarnings() {
 
   if (config.allowedOrigins.length === 0) {
     warnings.push(
-      'ALLOWED_ORIGINS is empty, so cross-origin browser requests are refused. Fine for local dev through the Vite proxy; set it once the site is deployed.'
+      'ALLOWED_ORIGINS is empty, so every browser origin is allowed. Fine for a public backend, but set it if you want to restrict who can POST.'
     );
   }
 

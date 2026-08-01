@@ -17,12 +17,15 @@ export function cors(req, res, next) {
   if (!origin) return next();
 
   const allowed = config.allowedOrigins.includes(origin.replace(/\/$/, ''));
+  const allowAll = config.allowedOrigins.length === 0;
 
-  if (allowed) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
+  if (allowed || allowAll) {
+    res.setHeader('Access-Control-Allow-Origin', allowAll ? '*' : origin);
     /* The allowlist is per-origin, so caches must key on Origin or one visitor's
      * response could be replayed to another. */
-    res.setHeader('Vary', 'Origin');
+    if (!allowAll) {
+      res.setHeader('Vary', 'Origin');
+    }
     res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     res.setHeader('Access-Control-Max-Age', '600');
