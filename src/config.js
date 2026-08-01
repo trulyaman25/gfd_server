@@ -66,7 +66,13 @@ export const config = {
   mongoDb: str('MONGODB_DB', 'girlfriends_day'),
 
   port: int('PORT', 4500),
-  host: str('HOST', '0.0.0.0'),
+  host: (() => {
+    const host = str('HOST', '0.0.0.0');
+    if (str('NODE_ENV', 'development') === 'production' && ['127.0.0.1', 'localhost', '::1'].includes(host)) {
+      return '0.0.0.0';
+    }
+    return host;
+  })(),
 
   adminToken: adminToken || null,
   allowedOrigins,
